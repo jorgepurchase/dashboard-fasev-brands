@@ -5,63 +5,104 @@
     <title>Mercados Fase V Rebajas 2026</title>
     <style>
         body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; background: #f4f7f6; padding: 40px 20px; color: #333; }
-        .container { max-width: 1000px; margin: auto; }
-        h1 { text-align: center; color: #2c3e50; margin-bottom: 40px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: transform 0.2s; }
-        .card:hover { transform: translateY(-5px); }
-        h2 { margin-top: 0; color: #2c3e50; border-bottom: 2px solid #f0f0f0; padding-bottom: 15px; font-size: 1.25em; }
-        ul { list-style: none; padding: 0; }
-        li { margin-bottom: 8px; font-size: 0.95em; line-height: 1.4; color: #555; }
-        .note { font-size: 0.85em; color: #7f8c8d; font-style: italic; margin-top: 5px; display: block; }
-        .tag { background: #e8f4fd; color: #2980b9; padding: 2px 8px; border-radius: 4px; font-weight: bold; font-size: 0.8em; }
+        .container { max-width: 1200px; margin: auto; }
+        h1 { text-align: center; color: #2c3e50; margin-bottom: 20px; }
+        #filterInput { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; }
+        table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        th, td { padding: 15px; text-align: left; border-bottom: 1px solid #eee; }
+        th { background-color: #f8f9fa; color: #2c3e50; font-weight: 600; }
+        tr:hover { background-color: #f1f1f1; }
+        .tag { background: #e8f4fd; color: #2980b9; padding: 2px 8px; border-radius: 4px; font-size: 0.85em; }
+        .check { color: #27ae60; font-weight: bold; }
     </style>
 </head>
 <body>
 <div class="container">
     <h1>Mercados Fase V Rebajas 2026</h1>
-    <div class="grid">
-        <div class="card">
-            <h2>Lefties</h2>
-            <ul><li>RO + FR</li></ul>
-        </div>
-        <div class="card">
-            <h2>ZaraHome</h2>
-            <ul>
-                <li>ID <span class="tag">web</span></li>
-                <li>UA <span class="tag">web</span></li>
-                <li>GR <span class="tag">web-mobile</span></li>
-            </ul>
-        </div>
-        <div class="card">
-            <h2>Massimo Dutti</h2>
-            <ul>
-                <li>IT + GR + NL + SE + DE + AD</li>
-                <li class="note">(Todas los frontales, excepto IPOD)</li>
-            </ul>
-        </div>
-        <div class="card">
-            <h2>Stradivarius</h2>
-            <ul>
-                <li>KZ (100% en apps)</li>
-                <li>Test AB: ES, GR, IT, RO, HR, LU, CY, FR, IC, IE, CO, CH, DK</li>
-                <li class="note">Los mercados grandes se desactivarán en pico. Sólo apps.</li>
-            </ul>
-        </div>
-        <div class="card">
-            <h2>Oysho</h2>
-            <ul>
-                <li>FR + GR + GB + RO + IC</li>
-                <li class="note">(Todas los frontales, excepto IPOD)</li>
-            </ul>
-        </div>
-        <div class="card">
-            <h2>Pull&Bear</h2>
-            <ul>
-                <li>Mercados post rebajas <span class="tag">público</span></li>
-            </ul>
-        </div>
-    </div>
+    <input type="text" id="filterInput" onkeyup="filterTable()" placeholder="Filtrar por cadena...">
+    <table id="mercadosTable">
+        <thead>
+            <tr>
+                <th>Marca</th>
+                <th>Mercados</th>
+                <th>iOS</th>
+                <th>Android</th>
+                <th>Web/Web-Mobile</th>
+                <th>% Fase V</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Lefties</td>
+                <td>RO + FR</td>
+                <td><span class="check">✓</span></td>
+                <td><span class="check">✓</span></td>
+                <td><span class="check">✓</span></td>
+                <td>100%</td>
+            </tr>
+            <tr>
+                <td>ZaraHome</td>
+                <td>ID (web), UA (web), GR (web-mobile)</td>
+                <td><span class="check">✓</span></td>
+                <td><span class="check">✓</span></td>
+                <td><span class="check">✓</span></td>
+                <td>100%</td>
+            </tr>
+            <tr>
+                <td>Massimo Dutti</td>
+                <td>IT, GR, NL, SE, DE, AD</td>
+                <td><span class="check">✓</span></td>
+                <td><span class="check">✓</span></td>
+                <td><span class="check">✓</span></td>
+                <td>100%</td>
+            </tr>
+            <tr>
+                <td>Stradivarius</td>
+                <td>KZ (apps), Test AB (ES, GR, IT, RO, HR, LU, CY, FR, IC, IE, CO, CH, DK)</td>
+                <td><span class="check">✓</span></td>
+                <td><span class="check">✓</span></td>
+                <td>-</td>
+                <td>50%</td>
+            </tr>
+            <tr>
+                <td>Oysho</td>
+                <td>FR, GR, GB, RO, IC</td>
+                <td><span class="check">✓</span></td>
+                <td><span class="check">✓</span></td>
+                <td><span class="check">✓</span></td>
+                <td>100%</td>
+            </tr>
+            <tr>
+                <td>Pull&Bear</td>
+                <td>Mercados post rebajas</td>
+                <td><span class="check">✓</span></td>
+                <td><span class="check">✓</span></td>
+                <td><span class="check">✓</span></td>
+                <td>100%</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
+
+<script>
+function filterTable() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("filterInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("mercadosTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 1; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+</script>
 </body>
 </html>
