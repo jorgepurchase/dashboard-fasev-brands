@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rebajas Inditex — Junio 2026</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { 
+  font-family: -apple-system, 'SF Pro Display', 'Helvetica Neue', 'Segoe UI', sans-serif;
+  background: #0d0d14; color: #e8e8e8; min-height: 100vh; 
+}
+.header { 
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  padding: 50px 20px 35px; text-align: center; border-bottom: 2px solid #1e3a5f;
+  position: relative; overflow: hidden;
+}
+.header::before {
+  content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+  background: radial-gradient(circle at 30% 50%, rgba(255,65,108,.08) 0%, transparent 50%),
+              radial-gradient(circle at 70% 50%, rgba(255,175,0,.06) 0%, transparent 50%);
+  animation: pulse 8s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:.5} 50%{opacity:1} }
+.header h1 { font-size: 2.5rem; font-weight: 700; position:relative; z-index:1;
+             background: linear-gradient(135deg, #ff416c, #ff4b2b);
+             -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.header h1 span { background: none; -webkit-text-fill-color: #fff; font-size: 1.8rem; }
+.header p { color: #8899aa; margin-top: 6px; font-size: 1.05rem; position:relative; z-index:1; }
+.container { max-width: 920px; margin: 0 auto; padding: 30px 20px 60px; }
+
+/* TABS */
+.tabs { display: flex; gap: 0; margin-bottom: 28px; background: #15152a; border-radius: 14px; padding: 4px; }
+.tab-btn { flex: 1; padding: 14px 20px; text-align: center; font-size: 1rem; font-weight: 600;
+           cursor: pointer; border: none; background: transparent; color: #667;
+           border-radius: 11px; transition: all .25s; outline: none; }
+.tab-btn:hover { color: #aaa; background: #1a1a35; }
+.tab-btn.active { color: #fff; background: linear-gradient(135deg, #ff416c, #ff4b2b); box-shadow: 0 4px 15px rgba(255,65,108,.3); }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* TIMELINE */
+.timeline { position: relative; padding-left: 80px; }
+.timeline::before { content: ''; position: absolute; left: 38px; top: 0; bottom: 0;
+                    width: 2px; background: linear-gradient(to bottom, #2a2a5a, #0d0d14); }
+.time-slot { position: relative; margin-bottom: 18px; }
+.time-slot .time-marker { 
+  position: absolute; left: -70px; top: 8px;
+  background: #15152a; border: 2px solid #ff416c; border-radius: 10px;
+  padding: 6px 10px 5px; font-size: .95rem; font-weight: 700; color: #ff416c;
+  white-space: nowrap; font-variant-numeric: tabular-nums; line-height: 1.2; text-align: center;
+  min-width: 52px; letter-spacing: .3px;
+}
+.time-slot .slot-content { background: #12121e; border: 1px solid #1e1e36; border-radius: 14px;
+    padding: 16px 20px; transition: all .25s; }
+.time-slot .slot-content:hover { border-color: #ff416c44; background: #16162a; transform: translateX(3px); }
+
+.slot-content .brand-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.brand-chip { display: inline-flex; align-items: center; gap: 5px; 
+    padding: 6px 14px 6px 10px; border-radius: 9px; font-size: .82rem; font-weight: 500; 
+    transition: all .2s; }
+.brand-chip:hover { transform: translateY(-2px) scale(1.02); }
+.brand-chip .bname { font-weight: 600; }
+.brand-chip .badge-vip { font-size: .6rem; font-weight: 700; background: rgba(255,215,0,.2); 
+    color: #ffd700; padding: 1px 6px; border-radius: 4px; letter-spacing: .5px; }
+.brand-chip .badge-pw { font-size: .6rem; font-weight: 700; background: rgba(100,181,246,.2);
+    color: #64b5f6; padding: 1px 6px; border-radius: 4px; letter-spacing: .3px; }
+.country-note { color: #667; font-size: .72rem; font-weight: 400; }
+
+.empty-day { text-align: center; padding: 60px 20px; color: #445; font-size: 1.1rem; }
+
+.day-subtitle { font-size: .85rem; color: #556; text-align: center; margin-bottom: 24px; margin-top: -18px; }
+
+/* FILTER BAR */
+.filter-bar { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; justify-content: center; }
+.filter-btn { padding: 6px 14px; border-radius: 20px; font-size: .78rem; font-weight: 600;
+              cursor: pointer; border: 2px solid; background: transparent;
+              transition: all .2s; outline: none; letter-spacing: .3px; }
+.filter-btn:hover { transform: translateY(-1px); }
+.filter-btn.active { color: #fff !important; }
+.filter-btn-todas { color: #889; border-color: #334; }
+.filter-btn-todas.active { background: #334; border-color: #556; }
+
+/* hidden slot */
+.time-slot.hidden { display: none; }
+.brand-chip.hidden { display: none; }
+
+.footer { text-align: center; padding: 30px 20px; color: #334; font-size: .8rem; border-top: 1px solid #1a1a30; }
+.footer span { color: #ff416c66; }
+</style>
+</head>
+<body>
+
+<div class="header">
+<h1>Rebajas Inditex</h1>
+<p>Summer Sales 2026 — Todos los mercados</p>
+</div>
+
+<div class="container">
+
+<div class="tabs">
+<button class="tab-btn" data-tab="23">Lun 23 · Pre-Ventas</button>
+<button class="tab-btn active" data-tab="24">Mar 24 · Rebajas</button>
+<button class="tab-btn" data-tab="25">Mié 25 · Madrugada</button>
+</div>
+
+<div id="tab-23" class="tab-content">
+<div class="day-subtitle">LUNES 23 junio 2026</div>
+<div class="filter-bar">
+<button class="filter-btn filter-btn-todas active" data-filter="" style="color:#889;border-color:#334" onclick="filterBrand('')">Todas</button>
+<button class="filter-btn" data-filter="Massimo Dutti" style="color:#42a5f5;border-color:#42a5f5" onclick="filterBrand('Massimo Dutti')">Massimo Dutti</button>
+<button class="filter-btn" data-filter="Zara" style="color:#ef5350;border-color:#ef5350" onclick="filterBrand('Zara')">Zara</button>
+</div>
+<div class="timeline">
+<div class="time-slot" data-brands="Massimo Dutti"><div class="time-marker">19:45</div><div class="slot-content"><div class="brand-list">
+<span class="brand-chip" data-brand="Massimo Dutti" style="background:#42a5f518;border:1px solid #42a5f540"><span class="bname" style="color:#42a5f5">Massimo Dutti</span><span class="badge-vip">VIP</span><span class="country-note">España</span></span>
+</div></div></div>
+<div class="time-slot" data-brands="Massimo Dutti"><div class="time-marker">20:45</div><div class="slot-content"><div class="brand-list">
+<span class="brand-chip" data-brand="Massimo Dutti" style="background:#42a5f518;border:1px solid #42a5f540"><span class="bname" style="color:#42a5f5">Massimo Dutti</span><span class="badge-vip">VIP</span><span class="country-note">Portugal</span></span>
+</div></div></div>
+<div class="time-slot" data-brands="Zara"><div class="time-marker">21:00</div><div class="slot-content"><div class="brand-list">
+<span class="brand-chip" data-brand="Zara" style="background:#ef535018;border:1px solid #ef535040"><span class="bname" style="color:#ef5350">Zara</span><span class="badge-pw">PW</span><span class="country-note">España</span></span>
+</div></div></div>
+</div>
+</div>
+<div id="tab-24" class="tab-content active">
+<div class="day-subtitle">MARTES 24 junio 2026</div>
+<div class="filter-bar">
+<button class="filter-btn filter-btn-todas active" data-filter="" style="color:#889;border-color:#334" onclick="filterBrand('')">Todas</button>
+<button class="filter-btn" data-filter="Bershka" style="color:#ff4081;border-color:#ff4081" onclick="filterBrand('Bershka')">Bershka</button>
+<button class="filter-btn" data-filter="Lefties" style="color:#26c6da;border-color:#26c6da" onclick="filterBrand('Lefties')">Lefties</button>
+<button class="filter-btn" data-filter="Massimo Dutti" style="color:#42a5f5;border-color:#42a5f5" onclick="filterBrand('Massimo Dutti')">Massimo Dutti</button>
+<button class="filter-btn" data-filter="Oysho" style="color:#ffa726;border-color:#ffa726" onclick="filterBrand('Oysho')">Oysho</button>
+<button class="filter-btn" data-filter="Pull&Bear" style="color:#66bb6a;border-color:#66bb6a" onclick="filterBrand('Pull&Bear')">Pull&Bear</button>
+<button class="filter-btn" data-filter="Stradivarius" style="color:#ab47bc;border-color:#ab47bc" onclick="filterBrand('Stradivarius')">Stradivarius</button>
+<button class="filter-btn" data-filter="Zara" style="color:#ef5350;border-color:#ef5350" onclick="filterBrand('Zara')">Zara</button>
+<button class="filter-btn" data-filter="Zara Home" style="color:#d4a574;border-color:#d4a574" onclick="filterBrand('Zara Home')">Zara Home</button>
+</div>
+<div class="timeline">
+<div class="time-slot" data-brands="Massimo Dutti"><div class="time-marker">01:45</div><div class="slot-content"><div class="brand-list">
+<span class="brand-chip" data-brand="Massimo Dutti" style="background:#42a5f518;border:1px solid #42a5f540"><span class="bname" style="color:#42a5f5">Massimo Dutti</span><span class="badge-vip">VIP</span><span class="country-note">México</span></span>
+</div></div></div>
+<div class="time-slot" data-brands="Massimo Dutti"><div class="time-marker">07:45</div><div class="slot-content"><div class="brand-list">
+<span class="brand-chip" data-brand="Massimo Dutti" style="background:#42a5f518;border:1px solid #42a5f540"><span class="bname" style="color:#42a5f5">Massimo Dutti</span><span class="country-note">Francia</span></span>
+</div></div></div>
+<div class="time-slot" data-brands="Bershka,Lefties,Oysho,Pull&Bear,Stradivarius,Zara,Zara Home"><div class="time-marker">08:00</div><div class="slot-content"><div class="brand-list">
+<span class="brand-chip" data-brand="Bershka" style="background:#ff408118;border:1px solid #ff408140"><span class="bname" style="color:#ff4081">Bershka</span><span class="country-note">Francia</span></span>
+<span class="brand-chip" data-brand="Lefties" style="background:#26c6da18;border:1px solid #26c6da40"><span class="bname" style="color:#26c6da">Lefties</span><span class="country-note">Francia</span></span>
+<span class="brand-chip" data-brand="Oysho" style="background:#ffa72618;border:1px solid #ffa72640"><span class="bname" style="color:#ffa726">Oysho</span><span class="country-note">Francia</span></span>
+<span class="brand-chip" data-brand="Pull&Bear" style="background:#66bb6a18;border:1px solid #66bb6a40"><span class="bname" style="color:#66bb6a">Pull&Bear</span><span class="country-note">Francia</span></span>
+<span class="brand-chip" data-brand="Stradivarius" style="background:#ab47bc18;border:1px solid #ab47bc40"><span class="bname" style="color:#ab47bc">Stradivarius</span><span class="country-note">Francia</span></span>
+<span class="brand-chip" data-brand="Zara" style="background:#ef535018;border:1px solid #ef535040"><span class="bname" style="color:#ef5350">Zara</span><span class="country-note">Francia</span></span>
+<span class="brand-chip" data-brand="Zara Home" style="background:#d4a57418;border:1px solid #d4a57440"><span class="bname" style="color:#d4a574">Zara Home</span><span class="country-note">Francia</span></span>
+</div></div></div>
+<div class="time-slot" data-brands="Massimo Dutti"><div class="time-marker">12:45</div><div class="slot-content"><div class="brand-list">
+<span class="brand-chip" data-brand="Massimo Dutti" style="background:#42a5f518;border:1px solid #42a5f540"><span class="bname" style="color:#42a5f5">Massimo Dutti</span><span class="country-note">Corea del Sur</span></span>
+</div></div></div>
+<div class="time-slot" data-brands="Zara,Zara Home"><div class="time-marker">13:00</div><div class="slot-content"><div class="brand-list">
+<span class="brand-chip" data-brand="Zara" style="background:#ef535018;border:1px solid #ef535040"><span class="bname" style="color:#ef5350">Zara</span><span class="country-note">Corea del Sur</span></span>
+<span class="brand-chip" data-brand="Zara Home" style="background:#d4a57418;border:1px solid #d4a57440"><span class="bname" style="color:#d4a574">Zara Home</span><span class="country-note">Corea del Sur</span></span>
+</div></div></div>
+<div class="time-slot" data-brands="Zara,Zara Home"><div class="time-marker">14:00</div><div class="slot-content"><div class="brand-list">
+<span class="brand-chip" data-brand="Zara" style="background:#ef535018;border:1px solid #ef535040"><span class="bname" style="color:#ef5350">Zara</span><span class="country-note">Japón</span></span>
+<span class="brand-chip" data-brand="Zara Home" style="background:#d4a57418;border:1px solid #d4a57440"><span class="bname" style="color:#d4a574">Zara Home</span><span class="country-note">Japón</span></span>
+</div></div></div>
+<div class="time-slot" data-brands="Bershka,Lefties,Pull&Bear,Stradivarius"><div class="time-marker">16:00</div><div class="slot-content"><div class="brand-list">
+<span class="brand-chip" data-brand="Bershka" style="background:#ff408118;border:1px solid #ff408140"><span class="bname" style="color:#ff4081">Bershka</span><span class="country-note">Turquía</span></span>
+<span class="brand-chip" data-brand="Lefties" style="background:#26c6da18;border:1px solid #26c6da40"><span class="bname" style="color:#26c6da">Lefties</span><span class="country-note">Turquía</span></span>
+<span class="brand-chip" data-brand="Pull&Bear" style="background:#66bb6a18;border:1px solid #66bb6a40"><span class="bname" style="color:#66bb6a">Pull&Bear</span><span class="country-note">Turquía</span></span>
+<span class="brand-chip" data-brand="Stradivarius" style="background:#ab47bc18;border:1px solid #ab47bc40"><span class="bname" style="color:#ab47bc">Stradivarius</span><span class="country-note">Turquía</span></span>
+</div></div></div>
+<div class="time-slot" data-brands="Bershka"><div class="time-marker">16:30</div><div class="slot-content"><div class="brand-list">
+<span class="brand-chip" data-brand="Bershka" style="background:#ff408118;border:1px solid #ff408140"><span class="bname" style="color:#ff4081">Bershka</span><span class="country-note">India</span></span>
+</div></div></div>
+<div class="time-slot" data-brands="Oysho"><div class="time-marker">17:00</div><div class="slot-content"><div class="brand-list">
+<span class="brand-chip" data-brand="Oysho" style="background:#ffa72618;border:1px solid #ffa72640"><span class="bname" style="color:#ffa726">Oysho</span><span class="country-note">Turquía</span></span>
+</div></div></div>
+<div class="time-slot" data-brands="Massimo Dutti"><div class="time-marker">17:15</div><div class="slot-content"><div class="brand-list">
+<span class="brand-chip" data-brand="Massimo Dutti" style="background:#42a5f518;border:1px solid #42a5f540"><span class="bname" style="color:#42a5f5">Massimo Dutti</span><span class="country-note">India</span></span>
+</div></div></div>
+<div class="time-slot" data-brands="Zara"><div class="time-marker">17:30</div><div class="slot-content"><div class="brand-list">
+<span class="brand-chip" data-brand="Zara" style="background:#ef535018;border:1px solid #ef535040"><span class="bname" style="color:#ef5350">Zara</span><span class="country-note">India</span></span>
+</div></div></div>
+<div class="time-slot" data-brands="Massimo Dutti"><div class="time-marker">17:45</div><div class="slot-content"><div class="brand-list">
+<span class="brand-chip" data-brand="Massimo Dutti" style="background:#42a5f518;border:1px solid #42a5f540"><span class="bname" style="color:#42a5f5">Massimo Dutti</span><span class="country-note">Polonia</span></span>
+<span class="brand-chip" data-brand="Massimo Dutti" style="background:#42a5f518;border:1px solid #42a5f540"><span class="bname" style="color:#42a5f5">Massimo Dutti</span><span class="country-note">Turquía</span></span>
+</div></div></div>
+<div class="time-slot" data-brands="Bershka,Pull&Bear,Stradivarius"><div class="time-marker">18:00</div><div class="slot-content"><div class="brand-list">
+<span class="brand-chip" data-brand="Bershka" style="background:#ff408118;border:1px solid #ff408140"><span class="bname" style="color:#ff4081">Bershka</span><span class="country-note">Alemania</span></span>
+<span class="brand-chip" data-brand="Pull&Bear" style="background:#66bb6a18;border:1px solid #66bb6a40"><span class="bname" style="color:#66bb6a">Pull&Bear</span><span class="country-note">Alemania</span></span>
+<span class="brand-chip" data-brand="Stradivarius" style="background:#ab47bc18;border:1px solid #ab47bc40"><span class="bname" style="color:#ab47bc">Stradivarius</span><span class="country-note">Alemania</span></span>
+<span class="brand-chip" data-brand="Bershka" style="background:#ff408118;border:1px solid #ff408140"><span class="bname" style="color:#ff4081">Bershka</span><span class="country-note">Polonia</span></span>
+<span class="brand-chip" data-brand="Pull&Bear" style="background:#66bb6a18;border:1px solid #66bb6a40"><span class="bname" style="color:#66bb6a">Pull&Bear</span><span class="country-note">Polonia</span></span>
+<span class="brand-chip" data-brand="Stradivarius" style="background:#ab47bc18;border:1px solid #ab47bc40"><span class="bname" style="color:#ab47bc">Stradivarius</span><span class="country-note">Polonia</span></span>
+</div></div></div>
+<div class="time-slot" data-brands="Bershka,Oysho,Pull&Bear,Stradivarius,Zara,Zara Home"><div class="time-marker">19:00</div><div class="slot-content"><div class="brand-list">
+<span class="brand-chip" data-brand="Zara" style="background:#ef535018;border:1px solid #ef535040"><span class="bname" style="color:#ef5350">Zara</span><span class="country-note">Dinamarca</span></span>
+<span class="brand-chip" data-brand="Bershka" style="background:#ff408118;border:1px solid #ff408140"><span class="bname" style="color:#ff4081">Bershka</span><span class="country-note">España</span></span>
+<span class="brand-chip" data-brand="Pull&Bear" style="background:#66bb6a18;border:1px solid #66bb6a40"><span class="bname" style="color:#66bb6a">Pull&Bear</span><span class="country-note">España</span></span>
+<span class="brand-chip" data-brand="Stradivarius" style="background:#ab47bc18;border:1px solid #ab47bc40"><span class="bname" style="color:#ab47bc">Stradivarius</span><span class="country-note">España</span></span>
+<span class="brand-chip" data-brand="Oysho" style="background:#ffa72618;border:1px solid #ffa72640"><span class="bname" style="color:#ffa726">Oysho</span><span class="country-note">Polonia</span></span>
+<span class="brand-chip" data-brand="Zara" style="background:#ef535018;border:1px solid #ef535040"><span class="bname" style="color:#ef5350">Zara</span><span class="country-note">Turquía</span></span>
+<span class="brand-chip" data-brand="Zara Home" style="background:#d4a57418;border:1px solid #d4a57440"><span class="bname" style="color:#d4a574">Zara Home</span><span class="country-note">Turquía</span></span>
+</div></div></div>
+<div class="time-slot" data-brands="Massimo Dutti"><div class="time-marker">19:45</div><div class="slot-content"><div class="brand-list">
+<span class="brand-chip" data-brand="Massimo Dutti" style="background:#42a5f518;border:1px solid #42a5f540"><span class="bname" style="color:#42a5f5">Massimo Dutti</span><span class="country-note">Alemania</span></span>
+<span class="brand-chip" data-brand="Massimo Dutti" style="background:#42a5f518;border:1px solid #42a5f540"><span class="bname" style="color:#42a5f5">Massimo Dutti</span><span class="country-note">España</span></span>
+</div></div></div>
+<div class="time-slot" data-brands="Bershka,Lefties,Oysho,Pull&Bear,Stradivarius,Zara,Zara Home"><div class="time-marker">20:00</div><div class="slot-content"><div class="brand-list">
+<span class="brand-chip" data-brand="Oysho" style="background:#ffa72618;border:1px solid #ffa72640"><span class="bname" style="color:#ffa726">Oysho</span><span class="country-note">Alemania</span></span>
+<span class="brand-chip" data-brand="Zara" style="background:#ef535018;border:1px solid #ef535040"><span class="bname" style="color:#ef5350">Zara</span><span class="country-note">Alemania</span></span>
+<span class="brand-chip" data-brand="Zara Home" style="background:#d4a57418;border:1px solid #d4a57440"><span class="bname" style="color:#d4a574">Zara Home</span><span class="country-note">Alemania</span></span>
+<span class="brand-chip" data-brand="Lefties" style="background:#26c6da18;border:1px solid #26c6da40"><span class="bname" style="color:#26c6da">Lefties</span><span class="country-note">España</span></span>
+<span class="brand-chip" data-brand="Bershka" style="background:#ff408118;border:1px solid #ff408140"><span class="bname" style="color:#ff4081">Bershka</span><span class="country-note">Reino Unido</span></span>
+<span class="brand-chip" data-brand="Pull&Bear" style="background:#66bb6a18;border:1px solid #66bb6a40"><span class="bname" style="color:#66bb6a">Pull&Bear</span><span class="country-note">Reino Unido</span></span>
+<span class="brand-chip" data-brand="Stradivarius" style="background:#ab47bc18;border:1px solid #ab47bc40"><span class="bname" style="color:#ab47bc">Stradivarius</span><span class="country-note">Reino Unido</span></span>
+<span class="brand-chip" data-brand="Zara" style="background:#ef535018;border:1px solid #ef535040"><span class="bname" style="color:#ef5350">Zara</span><span class="country-note">Polonia</span></span>
+<span class="brand-chip" data-brand="Zara Home" style="background:#d4a57418;border:1px solid #d4a57440"><span class="bname" style="color:#d4a574">Zara Home</span><span class="country-note">Polonia</span></span>
+<span class="brand-chip" data-brand="Zara" style="background:#ef535018;border:1px solid #ef535040"><span class="bname" style="color:#ef5350">Zara</span><span class="country-note">Grecia</span></span>
+<span class="brand-chip" data-brand="Zara" style="background:#ef535018;border:1px solid #ef535040"><span class="bname" style="color:#ef5350">Zara</span><span class="country-note">Rumanía</span></span>
+</div></div></div>
+<div class="time-slot" data-brands="Massimo Dutti"><div class="time-marker">20:45</div><div class="slot-content"><div class="brand-list">
+<span class="brand-chip" data-brand="Massimo Dutti" style="background:#42a5f518;border:1px solid #42a5f540"><span class="bname" style="color:#42a5f5">Massimo Dutti</span><span class="country-note">Portugal</span></span>
+</div></div></div>
+<div class="time-slot" data-brands="Bershka,Lefties,Oysho,Pull&Bear,Stradivarius,Zara,Zara Home"><div class="time-marker">21:00</div><div class="slot-content"><div class="brand-list">
+<span class="brand-chip" data-brand="Oysho" style="background:#ffa72618;border:1px solid #ffa72640"><span class="bname" style="color:#ffa726">Oysho</span><span class="country-note">España</span></span>
+<span class="brand-chip" data-brand="Zara" style="background:#ef535018;border:1px solid #ef535040"><span class="bname" style="color:#ef5350">Zara</span><span class="country-note">España</span></span>
+<span class="brand-chip" data-brand="Zara Home" style="background:#d4a57418;border:1px solid #d4a57440"><span class="bname" style="color:#d4a574">Zara Home</span><span class="country-note">España</span></span>
+<span class="brand-chip" data-brand="Zara" style="background:#ef535018;border:1px solid #ef535040"><span class="bname" style="color:#ef5350">Zara</span><span class="country-note">Islas Canarias</span></span>
+<span class="brand-chip" data-brand="Zara" style="background:#ef535018;border:1px solid #ef535040"><span class="bname" style="color:#ef5350">Zara</span><span class="country-note">Irlanda</span></span>
+<span class="brand-chip" data-brand="Bershka" style="background:#ff408118;border:1px solid #ff408140"><span class="bname" style="color:#ff4081">Bershka</span><span class="country-note">Portugal</span></span>
+<span class="brand-chip" data-brand="Oysho" style="background:#ffa72618;border:1px solid #ffa72640"><span class="bname" style="color:#ffa726">Oysho</span><span class="country-note">Portugal</span></span>
+<span class="brand-chip" data-brand="Pull&Bear" style="background:#66bb6a18;border:1px solid #66bb6a40"><span class="bname" style="color:#66bb6a">Pull&Bear</span><span class="country-note">Portugal</span></span>
+<span class="brand-chip" data-brand="Stradivarius" style="background:#ab47bc18;border:1px solid #ab47bc40"><span class="bname" style="color:#ab47bc">Stradivarius</span><span class="country-note">Portugal</span></span>
+</div></div></div>
+<div class="time-slot" data-brands="Massimo Dutti"><div class="time-marker">21:45</div><div class="slot-content"><div class="brand-list">
+<span class="brand-chip" data-brand="Massimo Dutti" style="background:#42a5f518;border:1px solid #42a5f540"><span class="bname" style="color:#42a5f5">Massimo Dutti</span><span class="country-note">Reino Unido</span></span>
+</div></div></div>
+<div class="time-slot" data-brands="Lefties,Oysho,Zara,Zara Home"><div class="time-marker">22:00</div><div class="slot-content"><div class="brand-list">
+<span class="brand-chip" data-brand="Oysho" style="background:#ffa72618;border:1px solid #ffa72640"><span class="bname" style="color:#ffa726">Oysho</span><span class="country-note">Reino Unido</span></span>
+<span class="brand-chip" data-brand="Zara" style="background:#ef535018;border:1px solid #ef535040"><span class="bname" style="color:#ef5350">Zara</span><span class="country-note">Reino Unido</span></span>
+<span class="brand-chip" data-brand="Zara Home" style="background:#d4a57418;border:1px solid #d4a57440"><span class="bname" style="color:#d4a574">Zara Home</span><span class="country-note">Reino Unido</span></span>
+<span class="brand-chip" data-brand="Lefties" style="background:#26c6da18;border:1px solid #26c6da40"><span class="bname" style="color:#26c6da">Lefties</span><span class="country-note">Portugal</span></span>
+</div></div></div>
+<div class="time-slot" data-brands="Zara,Zara Home"><div class="time-marker">23:00</div><div class="slot-content"><div class="brand-list">
+<span class="brand-chip" data-brand="Zara" style="background:#ef535018;border:1px solid #ef535040"><span class="bname" style="color:#ef5350">Zara</span><span class="country-note">Portugal</span></span>
+<span class="brand-chip" data-brand="Zara Home" style="background:#d4a57418;border:1px solid #d4a57440"><span class="bname" style="color:#d4a574">Zara Home</span><span class="country-note">Portugal</span></span>
+</div></div></div>
+</div>
+</div>
+<div id="tab-25" class="tab-content">
+<div class="day-subtitle">MIÉRCOLES 25 junio 2026</div>
+<div class="filter-bar">
+</div>
+<div class="timeline">
+<div class="time-slot" data-brands="Zara"><div class="time-marker">02:00</div><div class="slot-content"><div class="brand-list">
+<span class="brand-chip" data-brand="Zara" style="background:#ef535018;border:1px solid #ef535040"><span class="bname" style="color:#ef5350">Zara</span><span class="country-note">Brasil</span></span>
+</div></div></div>
+<div class="time-slot" data-brands="Zara"><div class="time-marker">03:00</div><div class="slot-content"><div class="brand-list">
+<span class="brand-chip" data-brand="Zara" style="background:#ef535018;border:1px solid #ef535040"><span class="bname" style="color:#ef5350">Zara</span><span class="country-note">Canadá</span></span>
+<span class="brand-chip" data-brand="Zara" style="background:#ef535018;border:1px solid #ef535040"><span class="bname" style="color:#ef5350">Zara</span><span class="country-note">Estados Unidos</span></span>
+</div></div></div>
+</div>
+</div>
+</div>
+
+<div class="footer">
+<span>INDITEX</span> · Datos Colabora · Rebajas verano 2026
+</div>
+
+<script>
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    this.classList.add('active');
+    document.getElementById('tab-' + this.dataset.tab).classList.add('active');
+  });
+});
+
+function filterBrand(brand) {
+  // Toggle button active state
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  if (brand === '') {
+    document.querySelector('.filter-btn-todas').classList.add('active');
+  } else {
+    document.querySelector(`.filter-btn[data-filter="${brand}"]`).classList.add('active');
+  }
+  
+  document.querySelectorAll('.tab-content.active .time-slot').forEach(slot => {
+    if (brand === '') {
+      slot.classList.remove('hidden');
+      slot.querySelectorAll('.brand-chip').forEach(chip => chip.classList.remove('hidden'));
+    } else {
+      const brands = (slot.dataset.brands || '').split(',');
+      if (brands.includes(brand)) {
+        slot.classList.remove('hidden');
+        slot.querySelectorAll('.brand-chip').forEach(chip => {
+          if (chip.dataset.brand === brand) {
+            chip.classList.remove('hidden');
+          } else {
+            chip.classList.add('hidden');
+          }
+        });
+      } else {
+        slot.classList.add('hidden');
+      }
+    }
+  });
+}
+</script>
+
+</body>
+</html>
